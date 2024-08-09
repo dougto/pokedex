@@ -39,7 +39,7 @@ export class PokemonService {
 
   public async findAll(offset?: number): Promise<Array<Pokemon>> {
     const limit = this.configService.get<number>('fetchPokemonListLimit');
-    const pokemonsListResult = await this.pokedex.getPokemonsList({offset, limit });
+    const pokemonsListResult = await this.pokedex.getPokemonsList({ offset, limit });
 
     const names = pokemonsListResult.results.map((result) => result.name);
 

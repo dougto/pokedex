@@ -10,7 +10,11 @@ export class PokemonController {
   public findAll(
     @Query('offset') offset: number,
   ): Promise<Array<Pokemon>> {
-    if (offset < 0) {
+    if (!offset) {
+      offset = 0;
+    }
+
+    if (typeof offset != 'number' || offset < 0) {
       throw new HttpException('invalid offset', HttpStatus.BAD_REQUEST);
     }
 
