@@ -1,0 +1,5 @@
+<form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+  <label for="name">Search pokemon by name: </label>
+  <input id="name" type="text" formControlName="name">
+  <button mat-raised-button>search</button>
+</form>

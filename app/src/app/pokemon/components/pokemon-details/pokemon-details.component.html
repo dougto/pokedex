@@ -1,0 +1,41 @@
+@if (pokemon) {
+  <section id="header-section">
+    <div id="image-container">
+      <img src="{{ pokemon.spriteUrl }}"/>
+      <h1>{{ pokemon.name }}</h1>
+    </div>
+    <div id="types-container">
+      @for (type of pokemon.types; track type) {
+        <pokemon-type [type]="(type)"/>
+      }
+    </div>
+  </section>
+
+  <div class="divider-line"></div>
+
+  <section id="info-section">
+    <p>height: {{ pokemon.height }}</p>
+    <p>weight: {{ pokemon.weight }}</p>
+  </section>
+
+  <div class="divider-line"></div>
+
+  <section id="moves-section">
+    <p><b>abilities:</b></p>
+    <ul>
+      @for (ability of pokemon.abilities; track ability) {
+        <li>{{ ability }}</li>
+      }
+    </ul>
+    <p><b>moves:</b></p>
+    <p>
+      @for (move of pokemon.moves; track move) {
+        {{ move }},
+      }
+    </p>
+  </section>
+} @else {
+  <div id="spinner-container">
+    <mat-spinner diameter="48"/>
+  </div>
+}

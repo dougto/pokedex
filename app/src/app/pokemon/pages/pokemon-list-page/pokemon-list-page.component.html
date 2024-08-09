@@ -1,0 +1,8 @@
+  <search-input (searchQuery)="onSearch($event)"/>
+  @if (isLoadingSearch) {
+    <div id="spinner-container">
+      <mat-spinner diameter="48"/>
+    </div>
+  } @else {
+    <pokemon-list (loadMore)="fetchPokemonList()" [pokemons]="pokemons" [isLoading]="isLoadingList"/>
+  }

@@ -1,0 +1,18 @@
+@if (pokemon) {
+  <div id="list-item-container" routerLink="{{ '/details/' + pokemon.id }}">
+    <div id="left-container">
+      <span id="img-container">
+        <img src="{{ pokemon.spriteUrl}}"/>
+      </span>
+      <section>
+        <p id="pokemon-name">{{ pokemon.name }}</p>
+        <p>
+        @for (type of pokemon.types; track type) {
+          <pokemon-type [type]="(type)"/>
+        }
+        </p>
+      </section>
+    </div>
+    <button mat-raised-button>see details</button>
+  </div>
+}
