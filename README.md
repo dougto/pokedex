@@ -1,31 +1,57 @@
-# Pokédex
+# Pokédex by Douglas
 
-This repository is a template for a Pokédex application. It contains a server-side
-REST API built using [NestJS](https://nestjs.com) and a client-side single-page
-application built in [Angular](https://angular.dev).
+This repository contains a Pokedex made by myself.
 
-## Prerequisites
-* [Node.js v20](https://nodejs.org/en)
+On the api level, [pokedex-promise-v2](https://github.com/PokeAPI/pokedex-promise-v2) library is used to fetch Pokemon data. This libary is useful because it wraps the pokeapi with typescript and a caching layer. So implementing cache was not needed.
 
-## Setup
-1. Clone the repository.
-2. Install dependencies:
-    ```shell
-    cd /path/to/cloned/pokedex/
-    cd api/
-    npm install
-    cd ../app/
-    npm install
-    ```
+On the app level, we have a list with all pokemons containing some basic data, and a details page with more data for each pokemon.
 
-## Run
-In two separate shells, start the API and app:
-```shell
-cd api/
+# Running the project
+
+With both approaches the website will be available on `http://localhost:4200`.
+
+## Without Docker
+
+To run without docker, node JS 20 is needed.
+
+To run the server, execute:
+```sh
+# change dir to api's folder
+cd api
+
+# install dependencies
+npm install
+
+# run the project
 npm run start
 ```
-```shell
-cd app/
+
+To run the app, on a different terminal session, execute:
+```sh
+# change dir to app's folder
+cd app
+
+# install dependencies
+npm install
+
+# run the project
 npm run start
 ```
-Both the API and app will rebuild as changes are made to them.
+
+## With Docker
+
+With docker, simply run:
+```sh
+docker-compose up
+```
+
+# Running tests
+
+Currently, only the api has tests. Execute the following commands:
+```sh
+# change dir to api's folder
+cd api
+
+# run tests
+npm run test
+```

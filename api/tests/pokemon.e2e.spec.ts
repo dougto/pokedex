@@ -43,6 +43,14 @@ describe('PokedexApi', () => {
       expect(pokemonResultNames).toEqual(expectedNames);
     });
 
+    it('using valid offset', async () => {
+      const response = await request(app.getHttpServer())
+        .get('/pokemon?offset=10')
+        .expect(200);
+
+      expect(response.body.length).toBe(10);
+    });
+
     it('should not accept invalid offset', async () => {
       const response = await request(app.getHttpServer())
         .get('/pokemon?offset=error')

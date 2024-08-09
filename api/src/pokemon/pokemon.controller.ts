@@ -14,7 +14,7 @@ export class PokemonController {
       offset = 0;
     }
 
-    if (typeof offset != 'number' || offset < 0) {
+    if (Number.isNaN(parseInt(`${offset}`))) {
       throw new HttpException('invalid offset', HttpStatus.BAD_REQUEST);
     }
 
