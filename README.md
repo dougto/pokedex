@@ -26,7 +26,7 @@ npm install
 npm run start
 ```
 
-To run the app, on a different terminal session, execute:
+While the api is running, run the app on a _different terminal session_, executing:
 ```sh
 # change dir to app's folder
 cd app
