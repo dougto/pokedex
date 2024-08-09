@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Param } from "@nestjs/common";
+import { Controller, Get, Query, Param, HttpException, HttpStatus } from "@nestjs/common";
 import { PokemonService } from './pokemon.service';
 import { Pokemon } from './pokemon.interface';
 
@@ -7,14 +7,22 @@ export class PokemonController {
   constructor(private pokemonService: PokemonService) {}
 
   @Get()
-  public async findAll(
+  public findAll(
     @Query('offset') offset: number,
   ): Promise<Array<Pokemon>> {
+    if (offset < 0) {
+      throw new HttpException('invalid offset', HttpStatus.BAD_REQUEST);
+    }
+
     return this.pokemonService.findAll(offset);
-  };
+  }
 
   @Get(':idOrName')
-  findOne(@Param('idOrName') idOrName: string): Promise<Pokemon | null> {
-    return this.pokemonService.findOne(idOrName)
+  public findOne(@Param('idOrName') idOrName: string): Promise<Pokemon | null> {
+    if (!idOrName) {
+      throw new HttpException('name or id not provided', HttpStatus.BAD_REQUEST);
+    }
+
+    return this.pokemonService.findOne(idOrName);
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
+import { ConfigService } from '@nestjs/config';
 import Pokedex from 'pokedex-promise-v2';
 import { Pokemon } from './pokemon.interface';
 
@@ -6,13 +7,13 @@ import { Pokemon } from './pokemon.interface';
 export class PokemonService {
   private pokedex: Pokedex = {} as Pokedex;
 
-  constructor() {
+  constructor(private configService: ConfigService) {
     const initPokedex = async () => {
       // Since this module is a ESM module, we need to dinamically import it
       const dynamicPokedex = await import('pokedex-promise-v2');
 
       this.pokedex = new dynamicPokedex.default();
-    }
+    };
 
     initPokedex();
   }
@@ -33,12 +34,12 @@ export class PokemonService {
       height,
       weight,
       name,
-    }
+    };
   }
 
   public async findAll(offset?: number): Promise<Array<Pokemon>> {
-    // TODO: limit configured by env variable
-    const pokemonsListResult = await this.pokedex.getPokemonsList({offset, limit: 10});
+    const limit = this.configService.get<number>('fetchPokemonListLimit');
+    const pokemonsListResult = await this.pokedex.getPokemonsList({offset, limit });
 
     const names = pokemonsListResult.results.map((result) => result.name);
 
@@ -52,10 +53,6 @@ export class PokemonService {
   }
 
   public async findOne(pokemonNameOrId: string): Promise<Pokemon | null> {
-    if (!pokemonNameOrId) {
-      throw new HttpException('name or id not provided', HttpStatus.BAD_REQUEST);;
-    }
-
     try {
       const pokedexPokemon = await this.pokedex.getPokemonByName(pokemonNameOrId);
 

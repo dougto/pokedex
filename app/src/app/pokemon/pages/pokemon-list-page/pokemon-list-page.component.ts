@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { PokemonService } from '../../pokemon.service';
 import { Pokemon } from '../../pokemon.interface';
 
@@ -8,34 +9,36 @@ import { Pokemon } from '../../pokemon.interface';
   styleUrl: './pokemon-list-page.component.scss',
 })
 export class PokemonListPageComponent {
-  public isLoadingList = false
-  public isLoadingSearch = false
+  public isLoadingList = false;
+  public isLoadingSearch = false;
   public pokemons: Pokemon[] = [];
 
-  constructor(private pokemonService: PokemonService) {
+  constructor(
+    private pokemonService: PokemonService,
+    private snackBar: MatSnackBar,
+  ) {
     this.fetchPokemonList();
   }
 
   public fetchPokemonList() {
-    this.isLoadingList = true
+    this.isLoadingList = true;
 
     this.pokemonService.fetchList(this.pokemons.length).then((list) => {
       this.pokemons = [...this.pokemons, ...list];
-      this.isLoadingList = false
+      this.isLoadingList = false;
     }).catch((error) => {
-      // TODO: handle error better?
-      console.log(error);
-      this.isLoadingList = false
+      this.snackBar.open(`fetch pokemon list error: ${error.message}`, 'close');
+      this.isLoadingList = false;
     });;
   }
 
   public onSearch(name: string) {
-    this.isLoadingSearch = true
+    this.isLoadingSearch = true;
 
     if (!name) {
       this.pokemons = [];
       this.fetchPokemonList();
-      this.isLoadingSearch = false
+      this.isLoadingSearch = false;
       return;
     }
 
@@ -45,11 +48,10 @@ export class PokemonListPageComponent {
       } else {
         this.pokemons = [];
       }
-      this.isLoadingSearch = false
+      this.isLoadingSearch = false;
     }).catch((error) => {
-      // TODO: handle error better?
-      console.log(error);
-      this.isLoadingSearch = false
+      this.snackBar.open(`fetch pokemon error: ${error.message}`, 'close');
+      this.isLoadingSearch = false;
     });
   }
 }

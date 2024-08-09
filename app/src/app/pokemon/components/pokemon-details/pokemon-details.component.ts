@@ -8,4 +8,4 @@ import { Pokemon } from '../../pokemon.interface';
 })
 export class PokemonDetailsComponent {
   @Input() pokemon: Pokemon | undefined;
-};
+}

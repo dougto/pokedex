@@ -6,6 +6,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { routes } from './pokedex-app.routes';
 import { PokedexAppComponent } from "./pokedex-app.component";
@@ -29,6 +30,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     MatButtonModule,
     ScrollingModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   providers: [
     PokemonService,

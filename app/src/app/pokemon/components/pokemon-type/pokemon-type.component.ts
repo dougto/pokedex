@@ -10,7 +10,7 @@ export class PokemonTypeComponent {
   @Input() type: PokemonType = 'unknown';
 
   // Credits to https://gist.github.com/apaleslimghost/0d25ec801ca4fc43317bcff298af43c3
-  colorTypeMap: Record<PokemonType, string> = {
+  public colorTypeMap: Record<PokemonType, string> = {
     normal: '#A8A77A',
     fire: '#EE8130',
     water: '#6390F0',

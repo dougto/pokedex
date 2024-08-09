@@ -8,7 +8,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class SearchInputComponent {
   @Output() searchQuery = new EventEmitter<string>();
-  searchForm = new FormGroup({
+  public searchForm = new FormGroup({
     name: new FormControl(''),
   });
 
@@ -16,4 +16,4 @@ export class SearchInputComponent {
     this.searchQuery.emit(this.searchForm.value.name || '');
     this.searchForm.controls.name.setValue('');
   }
-};
+}
