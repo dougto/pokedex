@@ -29,7 +29,7 @@ npm run start
 While the api is running, run the app on a _different terminal session_, executing:
 ```sh
 # change dir to app's folder
-cd app
+cd ../app
 
 # install dependencies
 npm install
